@@ -6,13 +6,30 @@ services:
             - ./frontend/public:/usr/share/nginx/html:ro
         ports:
             - 80:80
+        networks:
+            - isolated
+            - default
     node:
         image: node:18.16.1-slim
         volumes:
             - ./backend:/app
         working_dir: /app
-        ports:
-            - 3000:3000
+        networks:
+            - isolated
         command: node index.js
+    db:
+        image: postgres:alpine
+        volumes:
+            - ./postgres:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: OT7vsJ-a2Egwu-Arscy0
+        networks:
+            - isolated
 
-    
+networks:
+    isolated:
+        driver: bridge
+        internal: true
+    default:
+        driver: bridge
