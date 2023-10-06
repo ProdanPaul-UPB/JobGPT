@@ -1,0 +1,10 @@
+services:
+    server:
+        image: nginx
+        volumes:
+            - ./backend/templates:/etc/nginx/templates
+        ports:
+            - 80:80
+    node:
+        image: node:18.16.1-slim
+    
