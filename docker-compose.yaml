@@ -24,8 +24,11 @@ services:
         environment:
             POSTGRES_USER: admin
             POSTGRES_PASSWORD: OT7vsJ-a2Egwu-Arscy0
+        ports:
+            - 5432:5432
         networks:
             - isolated
+            - default
 
 networks:
     isolated:
