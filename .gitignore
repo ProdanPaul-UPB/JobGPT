@@ -1,7 +1,4 @@
 /backend/node_modules/
-.idea/JobGPT.iml
-.idea/modules.xml
-.idea/vcs.xml
-.idea/workspace.xml
-backend/.env
-postgres/
+/.idea/
+/backend/.env
+/postgres/
