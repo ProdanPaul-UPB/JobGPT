@@ -15,3 +15,15 @@
 {
   margin-bottom: 20px;
 }
+
+.set-card-title
+{
+  text-decoration: none;
+  color: black;
+
+  &:hover
+  {
+    cursor: pointer;
+    text-decoration: none;
+  }
+}

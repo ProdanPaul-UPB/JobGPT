@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 
 const Broadcasts = () => {
     return (
-        <Col sm={6}>
+        <Col sm={12}>
             <Card  className={"dash-card"}>
                 <Card.Header>
                     <Card.Title>Your Broadcasts</Card.Title>
@@ -40,7 +40,8 @@ const Broadcasts = () => {
                                upvotes={"15"} />
                 </Card.Body>
                 <Card.Footer>
-                    <button style={{background: 'none', color: '#153470', border: 'none'}} >View more</button>
+                    <button style={{background: 'none', color: '#153470', border: 'none', borderRight: '1px solid lightgray'}} >View more</button>
+                    <button style={{background: 'none', color: '#153470', border: 'none'}} >Add broadcast</button>
                 </Card.Footer>
             </Card>
         </Col>
