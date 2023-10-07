@@ -4,12 +4,16 @@ import {
     ChatContainer,
     MessageList,
     Message,
-    MessageInput, Avatar, Conversation,
+    MessageInput, Conversation,
 } from "@chatscope/chat-ui-kit-react";
 
-const Chat = () => {
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+const StudChat = () => {
     return (
-        <div style={{ position: "relative", height: "500px" }}>
+        <div style={{ position: "relative", height: "100vh" }}>
             <MainContainer>
                 <Conversation name="Lilly" lastSenderName="Lilly" info="Yes, i can do it for you">
                 </Conversation>
@@ -31,4 +35,4 @@ const Chat = () => {
     )
 }
 
-export default Chat;
+export default StudChat;

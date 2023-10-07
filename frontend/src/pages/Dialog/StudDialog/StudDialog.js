@@ -1,4 +1,4 @@
-const Dialog = () => {
+const StudDialog = () => {
     return (
         <div>
         <h1>Dialog</h1>
@@ -6,4 +6,4 @@ const Dialog = () => {
     );
 }
 
-export default Dialog;
+export default StudDialog;
