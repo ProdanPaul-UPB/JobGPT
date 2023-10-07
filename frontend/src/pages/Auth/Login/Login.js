@@ -31,7 +31,7 @@ const Login = () => {
                 </Card>
             </Container>
         </div>
-    )
+    );
 }
 
 export default Login;

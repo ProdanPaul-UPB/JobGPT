@@ -10,6 +10,8 @@ import NavigationBar from "./components/Navbar/NavigationBar";
 import Login from "./pages/Auth/Login/Login";
 import Register from "./pages/Auth/Register/Register";
 
+import OpportunitySearch from "./pages/Categories/OpportunitySearch";
+
 import OrgSettings from "./pages/Sections/Organization/Pages/Settings/OrgSettings";
 
 import OrganizationSidebarComponent from "./pages/Sections/Organization/OrganizationSidebarComponent";
@@ -31,10 +33,11 @@ function App() {
         <Routes>
             <Route element={<NavigationBar />}>
                 <Route path="/" element={<Home />} />
-                <Route path="/notifications" element={<Notifications />} />
-                <Route path="/dialog" element={<OrgDialog />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="notifications" element={<Notifications />} />
+                <Route path="dialog" element={<OrgDialog />} />
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="opportunity/:cat" element={<OpportunitySearch />} />
             </Route>
 
             <Route path="organization" element={<OrganizationSidebarComponent />} >
