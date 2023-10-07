@@ -7,6 +7,8 @@ import Home from "./pages/Home/Home";
 import Notifications from "./pages/Notifications/Notifications";
 import NavigationBar from "./components/Navbar/NavigationBar";
 
+import OrgSettings from "./pages/Sections/Organization/Pages/Settings/OrgSettings";
+
 import OrganizationSidebarComponent from "./pages/Sections/Organization/OrganizationSidebarComponent";
 import OrgDash from "./pages/Sections/Organization/Pages/OrgDash/OrgDash";
 import OrgChat from "./pages/Chat/OrgChat/OrgChat";
@@ -34,6 +36,7 @@ function App() {
                 <Route path="dash" element={<OrgDash />} ></Route>
                 <Route path="chat" element={<OrgChat />} ></Route>
                 <Route path="dialog" element={<OrgDialog />} ></Route>
+                <Route path="settings" element={<OrgSettings />} ></Route>
             </Route>
 
             <Route path="student" element={<StudentSidebarComponent />} >

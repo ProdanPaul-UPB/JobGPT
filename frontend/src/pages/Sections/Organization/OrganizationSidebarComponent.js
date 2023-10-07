@@ -49,6 +49,12 @@ const OrganizationSidebarComponent = () => {
       </Tooltip>
     );
 
+    const broadcasts_tooltip = (
+        <Tooltip id="tooltip">
+            <strong>Broadcasts</strong>
+        </Tooltip>
+    );
+
     const jobs_tooltip = (
         <Tooltip id="tooltip">
             <strong>Job Offers</strong>
@@ -100,9 +106,9 @@ const OrganizationSidebarComponent = () => {
                         </div>
                     </OverlayTrigger>
 
-                    <OverlayTrigger placement="right" overlay={chat_tooltip}>
+                    <OverlayTrigger placement="right" overlay={broadcasts_tooltip}>
                         <div className={"org-side-item"}>
-                            <Link to={"/organization/chat"} >
+                            <Link to={"/organization/broadcasts"} >
                                 <TbBuildingBroadcastTower size={30} className={"org-side-item-icon"} />
                             </Link>
                         </div>
@@ -110,7 +116,7 @@ const OrganizationSidebarComponent = () => {
 
                     <OverlayTrigger placement="right" overlay={jobs_tooltip}>
                         <div className={"org-side-item"}>
-                            <Link to={"/organization/chat"} >
+                            <Link to={"/organization/jobs"} >
                                 <BsBriefcase size={30} className={"org-side-item-icon"} />
                             </Link>
                         </div>
@@ -120,7 +126,9 @@ const OrganizationSidebarComponent = () => {
                 <div>
                     <OverlayTrigger placement="right" overlay={settings_tooltip}>
                         <div className={"org-side-item"}>
-                            <IoSettingsOutline size={30} className={"org-side-item-icon"} />
+                            <Link to={"/organization/settings"} >
+                                <IoSettingsOutline size={30} className={"org-side-item-icon"} />
+                            </Link>
                         </div>
                     </OverlayTrigger>
                 </div>
