@@ -4,7 +4,7 @@ export const login = async (params) => {
     try {
         const url = '/auth/login';
 
-        const data = await (await post(url, params.data)).data;
+        const data = await (await post(url, params.args)).data;
         params.setData(data);
         return data;
 
@@ -19,7 +19,7 @@ export const register = async (params) => {
     try {
         const url = '/auth/register';
 
-        const data = await (await post(url, params.data)).data;
+        const data = await (await post(url, params.args)).data;
         params.setData(data);
         return data;
 
