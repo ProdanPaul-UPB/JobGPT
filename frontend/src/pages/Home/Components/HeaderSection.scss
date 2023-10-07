@@ -1,0 +1,52 @@
+@import "../../../styles/baseColors";
+
+.page_title
+{
+  margin: auto;
+  padding-bottom: 100px;
+  padding-top: 100px;
+}
+
+.header-content
+{
+  min-height: 100vh;
+}
+
+.header-content__search
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.header-content__title
+{
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.search-button {
+  background-color: $accent_color;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  height: 100%;
+
+  &:hover {
+    background-color: darken($accent_color, 10%);
+  }
+}
+
+.search-field
+{
+  height: 45px;
+  width: 400px;
+  margin-right: 10px;
+  padding-left: 10px;
+}

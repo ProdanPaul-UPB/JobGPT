@@ -1,0 +1,29 @@
+@import "../../../../../styles/baseColors";
+
+.content-section
+{
+  width: 100%;
+  min-height: 100vh;
+}
+
+.page-title
+{
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: black;
+    margin: 5rem;
+}
+
+.dash-card
+{
+  box-shadow: 0px 3px 5px gray;
+  border-radius: 0px;
+  border: none;
+
+  margin-bottom: 20px;
+}
+
+.dash-card-broadcast-body
+{
+  padding: 0px;
+}

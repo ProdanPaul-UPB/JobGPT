@@ -1,0 +1,30 @@
+@import "../../styles/baseColors";
+
+.separation-div
+{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.main-nav
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo
+{
+  height: 100px;
+}
+
+.brand
+{
+  display: flex;
+}
+
+.brandtext
+{
+  margin: auto;
+  font-weight: 800;
+}
