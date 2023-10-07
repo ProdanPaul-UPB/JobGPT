@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../db/connect');
+const {generateRandomString} = require('../utils/functions');
 
 const EmailConfirmation = sequelize.define('EmailConfirmation', {
     uuid: {

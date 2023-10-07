@@ -12,7 +12,7 @@ const User = sequelize.define('User', {
             isEmail: true,
         },
     }, active: {
-        type: DataTypes.BOOLEAN, defaultValue: true,
+        type: DataTypes.BOOLEAN, defaultValue: false,
     }, icon: {
         type: DataTypes.STRING,
     }, password: {

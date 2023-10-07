@@ -1,5 +1,5 @@
 const generateRandomString = (length) => {
-    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let randomString = '';
 
     for (let i = 0; i < length; i++) {
@@ -9,4 +9,6 @@ const generateRandomString = (length) => {
 
     return randomString;
 };
+
+module.exports = {generateRandomString};
 
