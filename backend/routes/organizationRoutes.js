@@ -13,7 +13,7 @@ const {authenticateUser} = require("../middleware/authenticate");
 
 router.route('/').get(getAllOrganizations);
 
-router.route('/').post(authenticateUser, createOrganization);
+router.route('/').post(createOrganization);
 
 router.route('/').put(authenticateUser, updateOrganization);
 

@@ -1,6 +1,6 @@
 import "./Register.scss";
 import Form from "react-bootstrap/Form";
-import {Card, Tab} from "react-bootstrap";
+import {Button, Card, Tab} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
 import Tabs from "react-bootstrap/Tabs";
@@ -8,21 +8,34 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import useFetch from "../../../hooks/useFetch";
 import {register} from "../../../api/auth";
-import {validateForm} from "../../../utils/errors";
+import ErrorField, {validateForm} from "../../../utils/errors";
 import {REGEXP} from "../../../utils/constants";
+import {createStudent} from "../../../api/students";
+import {createOrganization} from "../../../api/organizations";
 
 const Register = () => {
     const nav = useNavigate();
 
     const initialState = {
-        username: '', password: '', confirm_password: '', email: '', address: '',
+        username: '', password: '', confirm_password: '', email: '',
     };
+    const initialStudentState = {
+        firstName: '', lastName: '', description: '',
+    };
+    const initialOrganizationState = {
+        name: '', category: '', description: '',
+    };
+
     const [form, setForm] = useState(initialState);
-    const [statusForm, setStatusForm] = useState({});
+    const [statusForm, setStatusForm] = useState({
+        firstName: '', lastName: '', description: '', name: '', category: '',
+    });
     const [errors, setErrors] = useState({});
     const [status, setStatus] = useState('student');
 
     const registerState = useFetch(register, {});
+    const studentState = useFetch(createStudent, {});
+    const orgState = useFetch(createOrganization, {});
 
     const handleInputForm = (event) => {
         const {name, value} = event.target;
@@ -40,14 +53,40 @@ const Register = () => {
 
     const handleSubmit = () => {
         if (form.password !== form.confirm_password) {
-            setErrors({password: "Passwords don't match"});
             return;
         }
         const validatedData = validateForm(initialState, form, {email: REGEXP.EMAIL});
+        const validatedStudent = validateForm(initialStudentState, statusForm);
+        const validatedOrganization = validateForm(initialOrganizationState, statusForm);
         if (Object.entries(validatedData).length > 0) {
             setErrors(validatedData);
             return;
         }
+
+        if (status === 'student' && Object.entries(validatedStudent).length > 0) {
+            setErrors(prev => ({...prev, ...validatedStudent}));
+            return;
+        }
+
+        if (status === 'organization' && Object.entries(validatedOrganization).length > 0) {
+            setErrors(prev => ({...prev, ...validatedOrganization}));
+            return;
+        }
+        setErrors({});
+        registerState.sendRequest(form).then(res => {
+            if (res) {
+                if (status === 'student') {
+                    studentState.sendRequest({...statusForm, userId: res.userId}).then(res => {
+
+                    });
+                } else {
+                    orgState.sendRequest({...statusForm, userId: res.userId}).then(res => {
+
+                    });
+                }
+                nav('/confirm-email');
+            }
+        });
     };
 
 
@@ -59,14 +98,36 @@ const Register = () => {
                     <Card.Text>
                         <Form>
                             <Form.Group controlId="formBasicEmail"> <Form.Label>Email</Form.Label> <Form.Control
-                                type="text" placeholder="Enter email"/>
+                                type="text" placeholder="Enter email" value={form.email} name={"email"}
+                                onChange={handleInputForm}
+                            />
+                                <ErrorField enabled={errors['email']}/>
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail"> <Form.Label>Username</Form.Label> <Form.Control
-                                type="text" placeholder="Enter username"/> </Form.Group> <Form.Group
+                                type="text" placeholder="Enter username"
+                                name={"username"}
+                                value={form.username}
+                                onChange={handleInputForm}
+                            />
+
+                                <ErrorField enabled={errors['username']}/>
+                            </Form.Group> <Form.Group
                             controlId="formBasicEmail"> <Form.Label>Password</Form.Label> <Form.Control
-                            type="password" placeholder="Enter password"/> </Form.Group> <Form.Group
+                            type="password" placeholder="Enter password"
+                            name={"password"}
+                            value={form.password}
+                            onChange={handleInputForm}
+                        />
+                            <ErrorField enabled={errors['password']}
+                                        error={(form.password !== form.confirm_password) ? 'Passwords do not match' : undefined}/>
+                        </Form.Group> <Form.Group
                             controlId="formBasicEmail"> <Form.Label>Confirm password</Form.Label> <Form.Control
-                            type="password" placeholder="Enter password"/> </Form.Group>
+                            type="password" placeholder="Enter password"
+                            name={"confirm_password"}
+                            value={form.confirm_password}
+                            onChange={handleInputForm}
+                        />
+                        </Form.Group>
                             <Tabs
                                 defaultActiveKey="student"
                                 id="uncontrolled-tab-example"
@@ -80,6 +141,7 @@ const Register = () => {
                                                       name="firstName"
                                                       value={statusForm.firstName}
                                                       onChange={handleInputStatusForm}/>
+                                        <ErrorField enabled={errors['firstName']}/>
                                     </Form.Group>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Last name</Form.Label>
@@ -87,6 +149,7 @@ const Register = () => {
                                                       name="lastName"
                                                       value={statusForm.lastName}
                                                       onChange={handleInputStatusForm}/>
+                                        <ErrorField enabled={errors['lastName']}/>
                                     </Form.Group>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Description</Form.Label>
@@ -97,6 +160,7 @@ const Register = () => {
                                             value={statusForm.description}
                                             onChange={handleInputStatusForm}
                                         />
+                                        <ErrorField enabled={errors['description']}/>
                                     </Form.Group>
                                 </Tab>
                                 <Tab eventKey="organization" title="Organization">
@@ -109,6 +173,7 @@ const Register = () => {
                                             value={form.name}
                                             onChange={handleInputForm}
                                         />
+                                        <ErrorField enabled={errors['name']}/>
                                     </Form.Group>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Organization type</Form.Label>
@@ -131,12 +196,13 @@ const Register = () => {
                                             value={statusForm.description}
                                             onChange={handleInputStatusForm}
                                         />
+                                        <ErrorField enabled={errors['description']}/>
                                     </Form.Group>
                                 </Tab>
                             </Tabs>
-                            <button className={"btn btn-primary"} onClick={handleSubmit}>
+                            <Button className={"btn btn-primary"} onClick={handleSubmit}>
                                 Register
-                            </button>
+                            </Button>
                             <div>
                                 <Link to={"/login"}>Already have an account? Login</Link>
                             </div>

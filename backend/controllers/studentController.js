@@ -45,7 +45,7 @@ const getStudentByUsername = async (req, res) => {
 const createStudent = async (req, res) => {
     try {
         const {firstname, lastname, description} = req.body;
-        const {uuid} = req.user;
+        const {uuid} = User.findOne({where: {username}}).uuid;
         const student = await Student.create({firstname, lastname, description, userId: uuid});
         res.status(StatusCodes.CREATED).json({student});
     } catch (error) {

@@ -37,6 +37,7 @@ function App() {
                 <Route path="dialog" element={<OrgDialog />} />
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
+                <Route path="confirm-emaiil" element={<Register />} />
                 <Route path="opportunity/:cat" element={<OpportunitySearch />} />
             </Route>
 

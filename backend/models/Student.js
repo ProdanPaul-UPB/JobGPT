@@ -7,11 +7,11 @@ const Student = sequelize.define('Student', {
     }, enabled: {
         type: DataTypes.BOOLEAN, defaultValue: true,
     }, description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, defaultValue: '',
     }, firstname: {
-        type: DataTypes.STRING, allowNull: false,
+        type: DataTypes.STRING, allowNull: false, defaultValue: '',
     }, lastname: {
-        type: DataTypes.STRING, allowNull: false,
+        type: DataTypes.STRING, allowNull: false, defaultValue: '',
     },
 });
 
