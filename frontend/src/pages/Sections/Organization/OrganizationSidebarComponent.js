@@ -2,9 +2,10 @@ import {Link, Outlet} from "react-router-dom";
 import "./OrganizationSidebarComponent.scss";
 
 import { IoSettingsOutline } from "react-icons/io5";
-import { BsRobot } from "react-icons/bs";
+import { BsRobot, BsBriefcase } from "react-icons/bs";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { TbBuildingCommunity } from "react-icons/tb";
+import { AiOutlineHome } from "react-icons/ai";
+import { TbBuildingCommunity, TbBuildingBroadcastTower } from "react-icons/tb";
 import { BiChat } from "react-icons/bi";
 
 import Tooltip from "react-bootstrap/Tooltip";
@@ -15,6 +16,12 @@ const OrganizationSidebarComponent = () => {
     const dashboard_tooltip = (
         <Tooltip id="tooltip">
             <strong>Dashboard</strong>
+        </Tooltip>
+    );
+
+    const home_tooltip = (
+        <Tooltip id="tooltip">
+            <strong>Home</strong>
         </Tooltip>
     );
 
@@ -42,10 +49,25 @@ const OrganizationSidebarComponent = () => {
       </Tooltip>
     );
 
+    const jobs_tooltip = (
+        <Tooltip id="tooltip">
+            <strong>Job Offers</strong>
+        </Tooltip>
+    );
+
     return (
-        <div style={{display: 'flex'}}>
+        <div className={"org-wrapper"} >
             <div className={"org-side-container"}>
-                <div>
+                <div className={"org-side-main"}>
+
+                    <OverlayTrigger placement="right" overlay={home_tooltip}>
+                        <div className={"org-side-item"}>
+                            <Link to={"/organization/dash"} >
+                                <AiOutlineHome size={30} className={"org-side-item-icon"} />
+                            </Link>
+                        </div>
+                    </OverlayTrigger>
+
                     <OverlayTrigger placement="right" overlay={dashboard_tooltip}>
                         <div className={"org-side-item"}>
                             <Link to={"/organization/dash"} >
@@ -77,6 +99,22 @@ const OrganizationSidebarComponent = () => {
                             </Link>
                         </div>
                     </OverlayTrigger>
+
+                    <OverlayTrigger placement="right" overlay={chat_tooltip}>
+                        <div className={"org-side-item"}>
+                            <Link to={"/organization/chat"} >
+                                <TbBuildingBroadcastTower size={30} className={"org-side-item-icon"} />
+                            </Link>
+                        </div>
+                    </OverlayTrigger>
+
+                    <OverlayTrigger placement="right" overlay={jobs_tooltip}>
+                        <div className={"org-side-item"}>
+                            <Link to={"/organization/chat"} >
+                                <BsBriefcase size={30} className={"org-side-item-icon"} />
+                            </Link>
+                        </div>
+                    </OverlayTrigger>
                 </div>
 
                 <div>
@@ -88,6 +126,7 @@ const OrganizationSidebarComponent = () => {
                 </div>
 
             </div>
+
             <Outlet />
         </div>
     );

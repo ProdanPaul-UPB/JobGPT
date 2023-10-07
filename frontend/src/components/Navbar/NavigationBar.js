@@ -8,11 +8,16 @@ import {AiOutlineBell, AiOutlineMail} from "react-icons/ai";
 
 import "./NavigationBar.scss";
 import Footer from "../Footer/Footer";
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
+
+import {useNavigate} from "react-router-dom";
 
 import Categories from "./Components/Categories/Categories";
 
 const NavigationBar = () => {
+
+    const navigate = useNavigate();
+
     return (
         <>
             <div style={{borderBottom: "1px solid lightgray"}}>
@@ -40,7 +45,7 @@ const NavigationBar = () => {
                                     <Nav.Link href="/chat">
                                         <AiOutlineMail size={25} style={{margin: 'auto', marginRight: '10px'}}/>
                                     </Nav.Link>
-                                    <NavDropdown title="Schimbă interacţiunea" id="collapsible-nav-dropdown">
+                                    <NavDropdown title="Navighezi ca Student" id="collapsible-nav-dropdown">
                                         <NavDropdown.Item href="#action/3.1">
                                             Student
                                         </NavDropdown.Item>
@@ -48,7 +53,9 @@ const NavigationBar = () => {
                                             Angajator / Universitate
                                         </NavDropdown.Item>
                                     </NavDropdown>
-                                    <Nav.Link href="#deets">Profil</Nav.Link>
+                                    <button onClick={() => {navigate('/organization/dash')}} style={{color: 'white', background: '#153470', border: 'none', borderRadius: "5px", padding: '0px 5px 0px 5px'}}>
+                                        Dashboard
+                                    </button>
                                 </Nav>
                             </div>
                         </Navbar.Collapse>

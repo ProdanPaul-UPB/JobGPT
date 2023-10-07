@@ -1,5 +1,22 @@
 @import "../../../styles/baseColors";
 
+.org-wrapper
+{
+  display: flex;
+
+
+  @media screen and (max-width: 768px) {
+   display: block;
+  }
+}
+
+.org-side-main
+{
+  @media screen and (max-width: 768px) {
+    display: flex;
+  }
+}
+
 .org-side-container
 {
   display: flex;
@@ -9,15 +26,27 @@
   width: 60px;
   background: $accent_color;
   border-right: 1px solid gray;
+
+  position: sticky;
+  top: 0;
+
+  @media screen and (max-width: 768px) {
+    position: relative;
+    flex-direction: row;
+    width: 100vw;
+    height: 60px;
+  }
 }
 
 .org-side-item
 {
-  background: $secondary_color;
+
+  border: 2px solid $primary_color;
+  border-radius: 10px;
+  background: $primary_color;
+
   height: 50px;
   width: 50px;
-  border: 2px solid transparent;
-  border-radius: 50px;
   margin: 5px;
   text-align: center;
 
@@ -29,19 +58,19 @@
 
   &:hover
   {
-    border: 2px solid $primary_color;
-    border-radius: 10px;
-    background: $primary_color;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    background: $secondary_color;
   }
 
   &:hover .org-side-item-icon
   {
-    color: white;
+    color: $primary_color;
   }
 
 }
 
 .org-side-item-icon
 {
-  color: $primary_color;
+  color: white;
 }

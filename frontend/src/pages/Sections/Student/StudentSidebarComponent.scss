@@ -1,8 +1,71 @@
-.org-side-container
+@import "../../../styles/baseColors";
+
+.stud-wrapper
+{
+  display: flex;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+}
+
+.stud-side-main
+{
+  @media screen and (max-width: 768px) {
+    display: flex;
+  }
+}
+
+.stud-side-container
 {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 100vh;
-  width: 500px;
-  background: #221122;
+  width: 60px;
+  background: $accent_color;
+  border-right: 1px solid gray;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: row;
+    width: 100vw;
+    height: 60px;
+  }
+}
+
+.stud-side-item
+{
+
+  border: 2px solid $primary_color;
+  border-radius: 10px;
+  background: $primary_color;
+
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.3s;
+
+  &:hover
+  {
+    border: 2px solid transparent;
+    border-radius: 50px;
+    background: $secondary_color;
+  }
+
+  &:hover .stud-side-item-icon
+  {
+    color: $primary_color;
+  }
+
+}
+
+.stud-side-item-icon
+{
+  color: white;
 }

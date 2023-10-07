@@ -8,7 +8,7 @@ import Notifications from "./pages/Notifications/Notifications";
 import NavigationBar from "./components/Navbar/NavigationBar";
 
 import OrganizationSidebarComponent from "./pages/Sections/Organization/OrganizationSidebarComponent";
-import OrgDash from "./pages/Sections/Organization/Pages/OrgDash";
+import OrgDash from "./pages/Sections/Organization/Pages/OrgDash/OrgDash";
 import OrgChat from "./pages/Chat/OrgChat/OrgChat";
 import OrgDialog from "./pages/Dialog/OrgDialog/OrgDialog";
 
