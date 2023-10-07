@@ -1,21 +1,25 @@
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {
-    MainContainer,
-    ChatContainer,
-    MessageList,
-    Message,
-    MessageInput,
-    Conversation,
-    ExpansionPanel,
-    Avatar,
-    ConversationList,
-    Search,
-    Sidebar,
-    ConversationHeader,
-    VoiceCallButton, VideoCallButton, InfoButton, TypingIndicator, MessageSeparator,
+  MainContainer,
+  ChatContainer,
+  MessageList,
+  Message,
+  MessageInput,
+  Conversation,
+  ExpansionPanel,
+  Avatar,
+  ConversationList,
+  Search,
+  Sidebar,
+  ConversationHeader,
+  VoiceCallButton,
+  VideoCallButton,
+  InfoButton,
+  TypingIndicator,
+  MessageSeparator,
 } from "@chatscope/chat-ui-kit-react";
 
-import {useState} from "react";
+import { useState, useEffect } from "react";
 
 import lillyIco from "../../../static/logo.png";
 import joeIco from "../../../static/logo.png";
@@ -25,206 +29,235 @@ import akaneIco from "../../../static/logo.png";
 import kaiIco from "../../../static/logo.png";
 import emilyIco from "../../../static/logo.png";
 import patrikIco from "../../../static/logo.png";
-
-
+import useMessages from "./../../../hooks/useMessages";
+import {
+  doc,
+  query,
+  collection,
+  orderBy,
+  onSnapshot,
+  setDoc,
+  addDoc,
+} from "firebase/firestore";
+import { db } from "../../../firebase/firebase";
+import { updateDoc, serverTimestamp } from "firebase/firestore";
+import { getAuthFromStorage } from "../../../utils/storage";
+import { getAllStudents } from "../../../api/students";
+import useFetch from "../../../hooks/useFetch";
 
 const OrgChat = () => {
+  let { messagesList, setTalkingToUid, loadingMessages } = useMessages();
 
-    const [messageInputValue, setMessageInputValue] = useState("");
+  const [messageInputValue, setMessageInputValue] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [activeConvo, setActiveConvo] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    return (
+  function sendMessage(toUid) {
+    console.log(toUid);
+    addDoc(
+      collection(
+        db,
+        "chats",
+        getAuthFromStorage().uuid,
+        "talkedTo",
+        toUid,
+        "mesaje"
+      ),
+      {
+        content: messageInputValue,
+        direction: "outgoing",
+        sentTime: serverTimestamp(),
+      }
+    );
 
-        <div style={{
-            height: "100vh",
-            width: "100vw",
-            position: "relative"
-        }}>
-            <MainContainer responsive>
-                <Sidebar position="left" scrollable={false}>
-                    <Search placeholder="Search..." />
-                    <ConversationList>
-                        <Conversation name="Lilly" lastSenderName="Lilly" info="Yes i can do it for you">
-                            <Avatar src={lillyIco} name="Lilly" status="available" />
-                        </Conversation>
+    // Add Doc also for the other user
+    addDoc(
+      collection(
+        db,
+        "chats",
+        toUid,
+        "talkedTo",
+        getAuthFromStorage().uuid,
+        "mesaje"
+      ),
+      {
+        content: messageInputValue,
+        direction: "incoming",
+        sentTime: serverTimestamp(),
+      }
+    );
 
-                        <Conversation name="Joe" lastSenderName="Joe" info="Yes i can do it for you">
-                            <Avatar src={joeIco} name="Joe" status="dnd" />
-                        </Conversation>
+    setMessageInputValue("");
+  }
 
-                        <Conversation name="Emily" lastSenderName="Emily" info="Yes i can do it for you" unreadCnt={3}>
-                            <Avatar src={emilyIco} name="Emily" status="available" />
-                        </Conversation>
+  const studentsAll = useFetch(getAllStudents, {}, true);
 
-                        <Conversation name="Kai" lastSenderName="Kai" info="Yes i can do it for you" unreadDot>
-                            <Avatar src={kaiIco} name="Kai" status="unavailable" />
-                        </Conversation>
+  // Use effect for activeConvo
+  useEffect(() => {
+    if (activeConvo) {
+      console.log(activeConvo);
+      setTalkingToUid(activeConvo.userId);
+    }
+  }, [activeConvo]);
 
-                        <Conversation name="Akane" lastSenderName="Akane" info="Yes i can do it for you">
-                            <Avatar src={akaneIco} name="Akane" status="eager" />
-                        </Conversation>
+  useEffect(() => {
+    setLoading(loadingMessages);
+    console.log(loadingMessages);
+  }, [loadingMessages]);
 
-                        <Conversation name="Eliot" lastSenderName="Eliot" info="Yes i can do it for you">
-                            <Avatar src={eliotIco} name="Eliot" status="away" />
-                        </Conversation>
+  useEffect(() => {
+    if (studentsAll.data && studentsAll.data.students) {
+      setStudents(studentsAll.data.students);
+      if (activeConvo == null) {
+        setActiveConvo(studentsAll.data.students[0]);
+      }
+    }
+  }, [studentsAll]);
 
-                        <Conversation name="Zoe" lastSenderName="Zoe" info="Yes i can do it for you" active>
-                            <Avatar src={zoeIco} name="Zoe" status="dnd" />
-                        </Conversation>
+  useEffect(() => {
+    setMessages(messagesList);
+  }, [messagesList]);
 
-                        <Conversation name="Patrik" lastSenderName="Patrik" info="Yes i can do it for you">
-                            <Avatar src={patrikIco} name="Patrik" status="invisible" />
-                        </Conversation>
+  return (
+    <div
+      style={{
+        height: "100vh",
+        width: "100vw",
+        position: "relative",
+      }}
+    >
+      <MainContainer responsive>
+        <Sidebar position="left" scrollable={false}>
+          <Search placeholder="Search..." />
+          <ConversationList>
+            {students &&
+              students.map((student) => {
+                if (student.userId != getAuthFromStorage().uuid) {
+                  return (
+                    <Conversation
+                      onClick={() => {
+                        setActiveConvo(student);
+                      }}
+                      name={student.lastname + " " + student.firstname}
+                      lastSenderName={
+                        student.lastname + " " + student.firstname
+                      }
+                      info="Yes i can do it for you"
+                    >
+                      <Avatar
+                        src={lillyIco}
+                        name={student.lastname + " " + student.firstname}
+                        status="available"
+                      />
+                    </Conversation>
+                  );
+                }
+              })}
+          </ConversationList>
+        </Sidebar>
 
-                    </ConversationList>
-                </Sidebar>
+        {/* Chat container */}
+        {!activeConvo ? (
+          <div>No selected conversation</div>
+        ) : (
+          <>
+            {loading ? (
+              <div style={{ width: "100%", height: "100%" }}>Loading</div>
+            ) : (
+              <ChatContainer>
+                <ConversationHeader>
+                  <ConversationHeader.Back />
+                  <Avatar
+                    src={zoeIco}
+                    name={activeConvo.lastname + " " + activeConvo.firstname}
+                  />
+                  <ConversationHeader.Content
+                    userName={
+                      activeConvo.lastname + " " + activeConvo.firstname
+                    }
+                    info="Active 10 mins ago"
+                  />
+                  <ConversationHeader.Actions>
+                    <VoiceCallButton />
+                    <VideoCallButton />
+                    <InfoButton />
+                  </ConversationHeader.Actions>
+                </ConversationHeader>
+                {/* Main Messages */}
 
-                <ChatContainer>
-                    <ConversationHeader>
-                        <ConversationHeader.Back />
+                <MessageList
+                  // typingIndicator={<TypingIndicator content="Zoe is typing" />}
+                >
+                  {/* <MessageSeparator content="Saturday, 30 November 2019" /> */}
+
+                  {messages.map((msg) => {
+                    return (
+                      <Message
+                        model={{
+                          message: msg.content,
+                          sentTime: "15 mins ago",
+                          sender: "Zoe",
+                          direction: msg.direction,
+                          position: "single",
+                        }}
+                      >
                         <Avatar src={zoeIco} name="Zoe" />
-                        <ConversationHeader.Content userName="Zoe" info="Active 10 mins ago" />
-                        <ConversationHeader.Actions>
-                            <VoiceCallButton />
-                            <VideoCallButton />
-                            <InfoButton />
-                        </ConversationHeader.Actions>
-                    </ConversationHeader>
-                    <MessageList typingIndicator={<TypingIndicator content="Zoe is typing" />}>
+                      </Message>
+                    );
+                  })}
+                </MessageList>
+                <MessageInput
+                  placeholder="Type message here"
+                  value={messageInputValue}
+                  onChange={(val) => {
+                    setMessageInputValue(val);
+                  }}
+                  onSend={() => {
+                    sendMessage(activeConvo.userId);
+                  }}
+                />
+              </ChatContainer>
+            )}
+          </>
+        )}
 
-                        <MessageSeparator content="Saturday, 30 November 2019" />
-
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Zoe",
-                            direction: "incoming",
-                            position: "single"
-                        }}>
-                            <Avatar src={zoeIco} name="Zoe" />
-                        </Message>
-
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Patrik",
-                            direction: "outgoing",
-                            position: "single"
-                        }} avatarSpacer />
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Zoe",
-                            direction: "incoming",
-                            position: "first"
-                        }} avatarSpacer />
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Zoe",
-                            direction: "incoming",
-                            position: "normal"
-                        }} avatarSpacer />
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Zoe",
-                            direction: "incoming",
-                            position: "normal"
-                        }} avatarSpacer />
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Zoe",
-                            direction: "incoming",
-                            position: "last"
-                        }}>
-                            <Avatar src={zoeIco} name="Zoe" />
-                        </Message>
-
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Patrik",
-                            direction: "outgoing",
-                            position: "first"
-                        }} />
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Patrik",
-                            direction: "outgoing",
-                            position: "normal"
-                        }} />
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Patrik",
-                            direction: "outgoing",
-                            position: "normal"
-                        }} />
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Patrik",
-                            direction: "outgoing",
-                            position: "last"
-                        }} />
-
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Zoe",
-                            direction: "incoming",
-                            position: "first"
-                        }} avatarSpacer />
-                        <Message model={{
-                            message: "Hello my friend",
-                            sentTime: "15 mins ago",
-                            sender: "Zoe",
-                            direction: "incoming",
-                            position: "last"
-                        }}>
-                            <Avatar src={zoeIco} name="Zoe" />
-                        </Message>
-                    </MessageList>
-                    <MessageInput placeholder="Type message here" value={messageInputValue} onChange={val => setMessageInputValue(val)} onSend={() => setMessageInputValue("")} />
-                </ChatContainer>
-
-                <Sidebar position="right">
-                    <ExpansionPanel open title="INFO">
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                    </ExpansionPanel>
-                    <ExpansionPanel title="LOCALIZATION">
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                    </ExpansionPanel>
-                    <ExpansionPanel title="MEDIA">
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                    </ExpansionPanel>
-                    <ExpansionPanel title="SURVEY">
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                    </ExpansionPanel>
-                    <ExpansionPanel title="OPTIONS">
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                        <p>Lorem ipsum</p>
-                    </ExpansionPanel>
-                </Sidebar>
-            </MainContainer>
-        </div>
-    )
-}
+        <Sidebar position="right">
+          <ExpansionPanel open title="INFO">
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+          </ExpansionPanel>
+          <ExpansionPanel title="LOCALIZATION">
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+          </ExpansionPanel>
+          <ExpansionPanel title="MEDIA">
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+          </ExpansionPanel>
+          <ExpansionPanel title="SURVEY">
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+          </ExpansionPanel>
+          <ExpansionPanel title="OPTIONS">
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum</p>
+          </ExpansionPanel>
+        </Sidebar>
+      </MainContainer>
+    </div>
+  );
+};
 
 export default OrgChat;

@@ -5,7 +5,7 @@ const Student = require('../models/Student');
 
 const getAllStudents = async (req, res) => {
     const students = await Student.findAll({
-        where: {enabled: true}, attributes: ['uuid', 'firstname', 'lastname', 'enabled', 'description', 'createdAt']
+        where: {enabled: true}, attributes: ['uuid', 'firstname', 'lastname', 'enabled', 'description', 'createdAt', 'userId']
     });
     res.status(StatusCodes.OK).json({students, count: students.length});
 };
