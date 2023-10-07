@@ -6,8 +6,8 @@ const User = require('../models/User');
 
 const createOrganization = async (req, res) => {
     try {
-        const {name, description, category, funds, plan} = req.body;
-        const {uuid} = req.user;
+        const {name, description, category, funds, plan, userId} = req.body;
+        const {uuid} = userId;
         const organization = await Organization.create({
             name, description, category, funds, plan, userId: uuid,
         });

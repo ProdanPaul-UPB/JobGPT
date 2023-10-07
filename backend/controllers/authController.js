@@ -37,7 +37,7 @@ const register = async (req, res) => {
         if (sendConfirmationEmail.result === 'error') {
             throw new CustomError.CustomError(sendConfirmationEmail.error);
         }
-        res.status(StatusCodes.CREATED).json({result: 'success'});
+        res.status(StatusCodes.CREATED).json({result: 'success', userId: user.uuid});
     } catch (error) {
         res.status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR).json({error: error.message});
     }
