@@ -23,6 +23,7 @@ import StudentSidebarComponent from "./pages/Sections/Student/StudentSidebarComp
 import StudDash from "./pages/Sections/Student/Pages/StudDash";
 import StudChat from "./pages/Chat/StudChat/StudChat";
 import StudDialog from "./pages/Dialog/StudDialog/StudDialog";
+import SubmitRegisterCode from "./pages/Auth/Register/SubmitRegisterCode";
 
 function App() {
 
@@ -37,7 +38,8 @@ function App() {
                 <Route path="dialog" element={<OrgDialog />} />
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
-                <Route path="opportunity/:cat" element={<OpportunitySearch />} />
+                <Route path="opportunities" element={<OpportunitySearch />} />
+                <Route path="submit-register-code" element={<SubmitRegisterCode />} />
             </Route>
 
             <Route path="organization" element={<OrganizationSidebarComponent />} >
