@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const User = sequelize.define('User', {
     uuid: {
         type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true,
+    }, username: {
+        type: DataTypes.STRING, allowNull: false, unique: true
     }, email: {
         type: DataTypes.STRING, allowNull: false, unique: true, validate: {
             isEmail: true,
@@ -18,11 +20,15 @@ const User = sequelize.define('User', {
             const hashedPassword = bcrypt.hashSync(password, 10);
             this.setDataValue('password', hashedPassword);
         },
-    }, created_at: {
+    }, createdAt: {
         type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW,
-    }, updated_at: {
+    }, updatedAt: {
         type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW,
     },
 });
+
+User.prototype.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 module.exports = User;
