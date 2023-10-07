@@ -4,7 +4,7 @@ import { AiOutlineLike } from "react-icons/ai";
 
 const Broadcast = ({avatar, name, title, content, time, upvotes, category}) => {
     return (
-        <div className={"wrapper"}>
+        <div className={"broadcast-wrapper"}>
             <div className={"avatar-box"}>
             </div>
             <div className={"content-box"}>
