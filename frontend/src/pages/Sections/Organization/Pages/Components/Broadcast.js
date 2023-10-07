@@ -25,7 +25,11 @@ const Broadcast = ({avatar, name, title, content, time, upvotes, category}) => {
                 </div>
 
                 <div className={"content-bottom-row"}>
-                    <p>{content}</p>
+                    <p>
+                        <span style={{fontWeight: 'bold'}}>Content</span>
+                        <span> · </span>
+                        {content}
+                    </p>
                     <p>
                         <AiOutlineLike />{upvotes}
                     </p>
