@@ -84,7 +84,7 @@ const Register = () => {
 
                     });
                 }
-                nav('/confirm-email');
+                nav('/submit-register-code');
             }
         });
     };

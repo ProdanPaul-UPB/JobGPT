@@ -18,7 +18,7 @@ export const getAllStudents = async (params) => {
 
 export const getStudent = async (params) => {
     try {
-        const url = `/students/${params.id}`;
+        const url = `/students/${params.args.id}`;
 
         const data = await (await get(url)).data;
         params.setData(data);
@@ -50,7 +50,7 @@ export const createStudent = async (params) => {
     try {
         const url = '/students';
 
-        const data = await (await post(url, params.data, loggedInHeaders())).data;
+        const data = await (await post(url, params.args, loggedInHeaders())).data;
         params.setData(data);
         return data;
 
@@ -65,7 +65,7 @@ export const updateStudent = async (params) => {
     try {
         const url = `/students`;
 
-        const data = await (await put(url, params.data, loggedInHeaders())).data;
+        const data = await (await put(url, params.args, loggedInHeaders())).data;
         params.setData(data);
         return data;
 

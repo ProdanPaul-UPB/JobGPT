@@ -34,7 +34,7 @@ export const emailConfirmation = async (params) => {
     try {
         const url = '/auth/email-confirmation';
 
-        const data = await (await post(url, params.data)).data;
+        const data = await (await post(url, params.args)).data;
         params.setData(data);
         return data;
 

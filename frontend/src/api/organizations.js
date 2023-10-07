@@ -18,7 +18,7 @@ export const getAllOrganizations = async (params) => {
 
 export const getOrganization = async (params) => {
     try {
-        const url = `/organizations/${params.id}`;
+        const url = `/organizations/${params.args.id}`;
 
         const data = await (await get(url)).data;
         params.setData(data);
@@ -50,7 +50,7 @@ export const createOrganization = async (params) => {
     try {
         const url = '/organizations';
 
-        const data = await (await post(url, params.data, loggedInHeaders())).data;
+        const data = await (await post(url, params.args, loggedInHeaders())).data;
         params.setData(data);
         return data;
 
@@ -65,7 +65,7 @@ export const updateOrganization = async (params) => {
     try {
         const url = `/organizations`;
 
-        const data = await (await put(url, params.data, loggedInHeaders())).data;
+        const data = await (await put(url, params.args, loggedInHeaders())).data;
         params.setData(data);
         return data;
 
