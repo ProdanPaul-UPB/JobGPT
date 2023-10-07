@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-import logo from "../../static/logo.jpg";
+import logo from "../../static/logo.png";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -31,7 +31,7 @@ const NavigationBar = () => {
                             <div className={"separation-div"}>
                                 <Nav className="me-auto">
                                     <Nav.Link href="#features">Funcţionalităţi</Nav.Link>
-                                    <Nav.Link href="#pricing">Contact</Nav.Link>
+                                    <Nav.Link href="#pricing">Echipă</Nav.Link>
                                 </Nav>
                                 <Nav>
                                     <Nav.Link href="/notifications">

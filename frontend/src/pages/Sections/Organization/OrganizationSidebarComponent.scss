@@ -1,0 +1,47 @@
+@import "../../../styles/baseColors";
+
+.org-side-container
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  width: 60px;
+  background: $accent_color;
+  border-right: 1px solid gray;
+}
+
+.org-side-item
+{
+  background: $secondary_color;
+  height: 50px;
+  width: 50px;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  margin: 5px;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.3s;
+
+  &:hover
+  {
+    border: 2px solid $primary_color;
+    border-radius: 10px;
+    background: $primary_color;
+  }
+
+  &:hover .org-side-item-icon
+  {
+    color: white;
+  }
+
+}
+
+.org-side-item-icon
+{
+  color: $primary_color;
+}
