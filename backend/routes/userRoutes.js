@@ -5,9 +5,9 @@ const {authenticateUser} = require("../middleware/authenticate");
 
 router.route('/').get(getAllUsers);
 
-router.route('/me').put(authenticateUser, updateMe);
+router.route('/').put(authenticateUser, updateMe);
 
-router.route('/me').delete(authenticateUser, deleteMe);
+router.route('/').delete(authenticateUser, deleteMe);
 
 router.route('/:username').get(getUser);
 

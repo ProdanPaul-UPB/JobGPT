@@ -7,7 +7,7 @@ const Organization = sequelize.define('Organization', {
     }, enabled: {
         type: DataTypes.BOOLEAN, defaultValue: true,
     }, description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, defaultValue: '',
     }, category: {
         type: DataTypes.ENUM('company', 'university'),
     }, funds: {

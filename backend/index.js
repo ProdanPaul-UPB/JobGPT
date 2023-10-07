@@ -18,8 +18,10 @@ app.use(errorHandlerMiddleware);
 app.use(express.json());
 
 //routes
-app.use('/api/v1/users', require('./routes/userRoutes'));
 app.use('/api/v1/auth', require('./routes/authRoutes'));
+app.use('/api/v1/users', require('./routes/userRoutes'));
+app.use('/api/v1/students', require('./routes/studentRoutes'));
+app.use('/api/v1/organizations', require('./routes/organizationRoutes'));
 
 
 app.listen(PORT, () => {
