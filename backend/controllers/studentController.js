@@ -46,7 +46,8 @@ const createStudent = async (req, res) => {
     try {
         const {firstname, lastname, description, userId} = req.body;
         const {uuid} = userId;
-        const student = await Student.create({firstname, lastname, description, userId: uuid});
+        console.log({firstname, lastname, description, userId})
+        const student = await Student.create({firstname, lastname, description, userId});
         res.status(StatusCodes.CREATED).json({student});
     } catch (error) {
         res.status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR).json({error: error.message});
