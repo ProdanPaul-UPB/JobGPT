@@ -36,7 +36,8 @@ const Login = () => {
 
         loginState.sendRequest(form).then(res => {
             if (res) {
-                saveAuthToStorage(res?.token);
+                console.log(res);
+                saveAuthToStorage({token: res?.token, uuid: res?.uuid});
                 console.log(res?.token);
                 context.setLoggedIn(true);
                 nav('/');
@@ -59,7 +60,7 @@ const Login = () => {
                                               value={form.username}
                                               onChange={handleInputForm}/>
                                 <ErrorField enabled={errors['username']}/>
-                            < /Form.Group>
+                            </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" placeholder="Enter password"
