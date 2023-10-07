@@ -1,7 +1,7 @@
 const {StatusCodes} = require('http-status-codes');
 const CustomError = require('../errors');
 const Broadcast = require('../models/Broadcast');
-const Job = require('../models/Job');
+const Job = require('../models/Jobs');
 
 const createJob = async (req, res) => {
     try {
@@ -41,7 +41,7 @@ const getAllJobsInBroadcast = async (req, res) => {
     }
 };
 
-const getJobInBroadcastById = async (req, res) => {
+const getJob = async (req, res) => {
     try {
         const {broadcastId, jobId} = req.params;
 
@@ -91,5 +91,5 @@ const updateJobInBroadcast = async (req, res) => {
 };
 
 module.exports = {
-    createJob, getAllJobsInBroadcast, getJobInBroadcastById, updateJobInBroadcast,
+    createJob, getAllJobsInBroadcast, getJob, updateJobInBroadcast,
 };

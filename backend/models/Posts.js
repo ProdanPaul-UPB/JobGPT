@@ -16,7 +16,4 @@ const Post = sequelize.define('Post', {
 const Broadcast = require('./Broadcast');
 Post.belongsTo(Broadcast, {foreignKey: 'broadcastId'});
 
-const UserUpvote = require('./UserUpvote');
-Post.hasMany(UserUpvote, {foreignKey: 'postId'});
-
 module.exports = Post;

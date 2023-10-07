@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
-    getAllBroadcasts, getBroadcastById, createBroadcast, updateBroadcast, deleteBroadcast,
+    getAllBroadcasts, getBroadcastById, createBroadcast, updateBroadcast,
 } = require('../controllers/broadcastsController');
 const {authenticateUser} = require("../middleware/authenticate");
 
@@ -16,8 +16,5 @@ router.route('/').post(authenticateUser, createBroadcast);
 
 // Update a broadcast (requires authentication)
 router.route('/').put(authenticateUser, updateBroadcast);
-
-// Delete a broadcast (requires authentication)
-router.route('/:uuid').delete(authenticateUser, deleteBroadcast);
 
 module.exports = router;
