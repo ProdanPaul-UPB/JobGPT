@@ -66,8 +66,7 @@ const NavigationBar = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <div className={"separation-div"}>
                             <Nav className="me-auto">
-                                <Nav.Link href="#features">Funcţionalităţi</Nav.Link>
-                                <Nav.Link href="#pricing">Echipă</Nav.Link>
+                                <Nav.Link href="/team">Echipă</Nav.Link>
                             </Nav>
                             <Nav>
                                 <Nav.Link href="/notifications">
@@ -92,7 +91,7 @@ const NavigationBar = () => {
                                         >
                                             Angajator / Universitate
                                         </NavDropdown.Item>
-                                    </NavDropdown>) : (<Link to={'/login'}>Login</Link>)}
+                                    </NavDropdown>) : (<Nav.Link style={{marginRight: '10px'}} href={'/login'}>Login</Nav.Link>)}
 
                                 <button onClick={() => {
                                     navigate('/organization/dash')

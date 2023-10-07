@@ -14,8 +14,14 @@ const JobOffers = () => {
                 <Card.Header>
                     <Card.Title>Your Job Listings</Card.Title>
                 </Card.Header>
-                <Card.Body>
-
+                <Card.Body style={{padding: '0px'}}>
+                    <JobOffer name={"Paul"}
+                              title={"Junior Software Developer"}
+                              org={"Microsoft"}
+                              time={"7 mins ago"}
+                              content={"lorem ipsum dolor sit amet..."}
+                              category={"Design"}
+                              applicants={"15"} />
                 </Card.Body>
                 <Card.Footer>
                     <button style={{background: 'none', color: '#153470', border: 'none', borderRight: '1px solid lightgray'}} >View more</button>

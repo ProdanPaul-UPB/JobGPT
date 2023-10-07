@@ -2,14 +2,15 @@ import Category from "./Category";
 import "./Categories.scss";
 
 const Categories = () => {
+
     return (
         <div className="categories">
-            <Category name={"Grafică & Design"} />
-            <Category name={"Programare & Tech"} />
-            <Category name={"Digital marketing & Business"} />
-            <Category name={"Video & Fotografie"} />
-            <Category name={"Medicină / Big Pharma"} />
-            <Category name={"Muzică & Audio"} />
+            <Category name={"Grafică & Design"} path={"design"} />
+            <Category name={"Programare & Tech"} path={"tech"} />
+            <Category name={"Digital marketing & Business"} path={"business"} />
+            <Category name={"Video & Fotografie"} path={"videophoto"} />
+            <Category name={"Medicină / Big Pharma"} path={"med"} />
+            <Category name={"Muzică & Audio"} path={"audio"} />
         </div>
     )
 }

@@ -25,12 +25,6 @@ const OrganizationSidebarComponent = () => {
         </Tooltip>
     );
 
-    const bot_tooltip = (
-        <Tooltip id="tooltip">
-            <strong>JobGPT Dialog</strong>
-        </Tooltip>
-    );
-
     const org_tooltip = (
         <Tooltip id="tooltip">
             <strong>Organizations</strong>
@@ -68,7 +62,7 @@ const OrganizationSidebarComponent = () => {
 
                     <OverlayTrigger placement="right" overlay={home_tooltip}>
                         <div className={"org-side-item"}>
-                            <Link to={"/organization/dash"} >
+                            <Link to={"/"} >
                                 <AiOutlineHome size={30} className={"org-side-item-icon"} />
                             </Link>
                         </div>
@@ -78,14 +72,6 @@ const OrganizationSidebarComponent = () => {
                         <div className={"org-side-item"}>
                             <Link to={"/organization/dash"} >
                                 <AiOutlineDashboard size={30} className={"org-side-item-icon"} />
-                            </Link>
-                        </div>
-                    </OverlayTrigger>
-
-                    <OverlayTrigger placement="right" overlay={bot_tooltip}>
-                        <div className={"org-side-item"}>
-                            <Link to={"/organization/dialog"} >
-                                <BsRobot size={30} className={"org-side-item-icon"} />
                             </Link>
                         </div>
                     </OverlayTrigger>

@@ -1,10 +1,14 @@
 import "./Broadcast.scss";
 
 import { AiOutlineLike } from "react-icons/ai";
+import { useNavigate} from "react-router-dom";
 
 const Broadcast = ({avatar, name, title, content, time, upvotes, category}) => {
+
+    const navigate = useNavigate();
+
     return (
-        <div className={"broadcast-wrapper"}>
+        <div onClick={() => {navigate("/")}} className={"broadcast-wrapper"}>
             <div className={"avatar-box"}>
             </div>
             <div className={"content-box"}>
@@ -21,7 +25,11 @@ const Broadcast = ({avatar, name, title, content, time, upvotes, category}) => {
                 </div>
 
                 <div className={"content-bottom-row"}>
-                    <p>{content}</p>
+                    <p>
+                        <span style={{fontWeight: 'bold'}}>Content</span>
+                        <span> · </span>
+                        {content}
+                    </p>
                     <p>
                         <AiOutlineLike />{upvotes}
                     </p>

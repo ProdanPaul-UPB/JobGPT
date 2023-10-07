@@ -1,8 +1,13 @@
 import "./Category.scss";
-const Category = ({ name }) => {
+
+import {useNavigate} from "react-router-dom";
+const Category = ({ name, path }) => {
+
+    const navigate = useNavigate();
+
     return (
         <>
-            <button className={"category"}>{name}</button>
+            <button onClick={() => {navigate(`/careers/${path}`)}} className={"category"}>{name}</button>
         </>
     );
 }

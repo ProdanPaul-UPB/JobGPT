@@ -50,6 +50,8 @@ export const createStudent = async (params) => {
     try {
         const url = '/students';
 
+        console.log(params);
+
         const data = await (await post(url, params.args, loggedInHeaders())).data;
         params.setData(data);
         return data;
