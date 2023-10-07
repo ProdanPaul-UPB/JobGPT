@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Broadcasts from "./Gadgets/Broadcasts";
 import JobOffers from "./Gadgets/JobOffers";
-import Groups from "./Gadgets/Groups";
+import EduOffers from "./Gadgets/EduOffers";
 
 import "./OrgDash.scss";
 
@@ -21,15 +21,8 @@ const OrgDash = () => {
 
                     <JobOffers />
 
-                    <Groups />
+                    <EduOffers />
 
-                    <Col sm={6}>
-                        <Card  className={"dash-card"}>
-                            <Card.Header>
-                                <Card.Title>Trends</Card.Title>
-                            </Card.Header>
-                        </Card>
-                    </Col>
                 </Row>
             </Container>
         </div>

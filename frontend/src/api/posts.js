@@ -1,14 +1,13 @@
 import {post, get, put} from "./utils/requests";
 import {loggedInHeaders} from "./utils/api";
 
-export const getAllStudents = async (params) => {
+export const getAllPosts = async (params) => {
     try {
-        const url = '/students';
+        const url = '/posts';
 
         const data = await (await get(url)).data;
         params.setData(data);
         return data;
-
     } catch (err) {
         params.setError(err);
     } finally {
@@ -16,14 +15,13 @@ export const getAllStudents = async (params) => {
     }
 };
 
-export const getStudent = async (params) => {
+export const getPost = async (params) => {
     try {
-        const url = `/students/${params.args.id}`;
+        const url = `/posts/${params.args.id}`;
 
         const data = await (await get(url)).data;
         params.setData(data);
         return data;
-
     } catch (err) {
         params.setError(err);
     } finally {
@@ -31,29 +29,13 @@ export const getStudent = async (params) => {
     }
 };
 
-export const getStudentByUsername = async (params) => {
+export const createPost = async (params) => {
     try {
-        const url = `/students/username/${params.username}`;
-
-        const data = await (await get(url)).data;
-        params.setData(data);
-        return data;
-
-    } catch (err) {
-        params.setError(err);
-    } finally {
-        params.setLoading(false);
-    }
-};
-
-export const createStudent = async (params) => {
-    try {
-        const url = '/students';
+        const url = '/posts';
 
         const data = await (await post(url, params.args, loggedInHeaders())).data;
         params.setData(data);
         return data;
-
     } catch (err) {
         params.setError(err);
     } finally {
@@ -61,14 +43,13 @@ export const createStudent = async (params) => {
     }
 };
 
-export const updateStudent = async (params) => {
+export const updatePost = async (params) => {
     try {
-        const url = `/students`;
+        const url = `/posts`;
 
         const data = await (await put(url, params.args, loggedInHeaders())).data;
         params.setData(data);
         return data;
-
     } catch (err) {
         params.setError(err);
     } finally {

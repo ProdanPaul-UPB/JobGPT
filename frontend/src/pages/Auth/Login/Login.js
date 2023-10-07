@@ -6,10 +6,11 @@ import {login} from "../../../api/auth";
 import useFetch from "../../../hooks/useFetch";
 import ErrorField, {validateForm} from "../../../utils/errors";
 import {saveAuthToStorage} from "../../../utils/storage";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useOutletContext} from "react-router-dom";
 
 const Login = () => {
     const nav = useNavigate();
+    const context = useOutletContext();
 
     const initialState = {
         username: '', password: '',
@@ -38,6 +39,7 @@ const Login = () => {
                 console.log(res);
                 saveAuthToStorage({token: res?.token, uuid: res?.uuid});
                 console.log(res?.token);
+                context.setLoggedIn(true);
                 nav('/');
             }
         });

@@ -1,4 +1,3 @@
-import "./OrgSettings.scss";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -6,89 +5,70 @@ import Col from "react-bootstrap/Col";
 
 const OrgSettings = () => {
     return (
-        <div className={"content-section"}>
+        <div style={{minHeight: '100vh', width: '100%'}}>
             <Container>
-                <h1 className={"page-title"}>Settings</h1>
+                <h1 style={{marginTop: '5rem', marginBottom: '5rem'}}>Organization Settings</h1>
 
-                <div style={{textAlign: 'left'}}>
+                <Form>
+                    <Row>
+                        <Col sm={6} style={{marginBottom: '2rem'}}>
+                            <Form.Group style={{textAlign: 'left'}}>
+                                <Form.Label>Organization Name</Form.Label>
+                                <Form.Control type="text" placeholder="Enter organization name" />
+                            </Form.Group>
+                        </Col>
 
-                    <h2 style={{marginBottom: "20px"}}>Account</h2>
+                        <Col sm={6} style={{marginBottom: '2rem'}}>
+                            <Form.Group style={{textAlign: 'left'}}>
+                                <Form.Label>Organization Website</Form.Label>
+                                <Form.Control type="text" placeholder="Enter organization website" />
+                            </Form.Group>
+                        </Col>
 
-                    <Form>
-                        <Row>
+                        <Col sm={12} style={{marginBottom: '2rem'}}>
+                            <Form.Group style={{textAlign: 'left'}}>
+                                <Form.Label>Organization Description</Form.Label>
+                                <Form.Control as="textarea" rows={3} placeholder="Enter organization description" />
+                            </Form.Group>
+                        </Col>
 
-                            <Col sm={6} className={"input-field"}>
-                                <Form.Group>
-                                    <Form.Label>First Name</Form.Label>
-                                    <Form.Control type="text"/>
-                                </Form.Group>
-                            </Col>
+                        <Col sm={6} style={{marginBottom: '2rem'}}>
+                            <Form.Group style={{textAlign: 'left'}}>
+                                <Form.Label>Organization Email</Form.Label>
+                                <Form.Control type="email" placeholder="Enter organization email" />
+                            </Form.Group>
+                        </Col>
 
-                            <Col sm={6} className={"input-field"}>
-                                <Form.Group>
-                                    <Form.Label>Last Name</Form.Label>
-                                    <Form.Control type="text"/>
-                                </Form.Group>
-                            </Col>
+                        <Col sm={6} style={{marginBottom: '2rem'}}>
+                            <Form.Group style={{textAlign: 'left'}}>
+                                <Form.Label>Organization Phone Number</Form.Label>
+                                <Form.Control type="tel" placeholder="Enter organization phone number" />
+                            </Form.Group>
+                        </Col>
 
-                            <Col sm={6} className={"input-field"}>
-                                <Form.Group>
-                                    <Form.Label>Username</Form.Label>
-                                    <Form.Control type="text"/>
-                                </Form.Group>
-                            </Col>
+                        <Col sm={6} style={{marginBottom: '2rem'}}>
+                            <Form.Select style={{borderColor: 'lightgray', width: '100%', height: '50px'}}>
+                                <option>Organization Tags</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </Form.Select>
+                        </Col>
 
-                            <Col sm={6} className={"input-field"}>
-                                <Form.Group controlId="formBasicEmail">
-                                    <Form.Label>Email address</Form.Label>
-                                    <Form.Control type="email"/>
-                                </Form.Group>
-                            </Col>
+                        <Col sm={6} style={{marginBottom: '2rem'}}>
+                            <Form.Select style={{borderColor: 'lightgray', width: '100%', height: '50px'}}>
+                                <option>Organization Tags</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </Form.Select>
+                        </Col>
 
-                            <Col sm={6} className={"input-field"}>
-                                <Form.Group controlId="formBasicPassword">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password"/>
-                                </Form.Group>
-                            </Col>
+                    </Row>
 
-                        </Row>
+                    <button style={{background: "#153470", border: 'none', color: 'white', padding: '10px 20px 10px 20px', borderRadius: '8px'}}>Save</button>
 
-                    </Form>
-                </div>
-
-                <div style={{textAlign: 'left'}}>
-
-                    <h2 style={{marginBottom: "20px"}}>Organization</h2>
-
-                    <Form>
-                        <Row>
-
-                            <Col sm={6} className={"input-field"}>
-                                <Form.Group>
-                                    <Form.Label>Name</Form.Label>
-                                    <Form.Control type="text"/>
-                                </Form.Group>
-                            </Col>
-
-                            <Col sm={6} className={"input-field"}>
-                                <Form.Group>
-                                    <Form.Label>Activity Domain</Form.Label>
-                                    <Form.Control type="text"/>
-                                </Form.Group>
-                            </Col>
-
-                            <Col sm={6} className={"input-field"}>
-                                <Form.Group>
-                                    <Form.Label>Location</Form.Label>
-                                    <Form.Control type="text"/>
-                                </Form.Group>
-                            </Col>
-
-                        </Row>
-
-                    </Form>
-                </div>
+                </Form>
             </Container>
         </div>
     );

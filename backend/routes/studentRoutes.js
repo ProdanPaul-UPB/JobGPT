@@ -7,7 +7,7 @@ const {authenticateUser} = require("../middleware/authenticate");
 
 router.route('/').get(getAllStudents);
 
-router.route('/').post(authenticateUser, createStudent);
+router.route('/').post(createStudent);
 
 router.route('/').put(authenticateUser, updateStudent);
 

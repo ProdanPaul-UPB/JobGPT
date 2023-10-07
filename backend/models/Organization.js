@@ -1,25 +1,37 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../db/connect');
 
-const Organization = sequelize.define('Organization', {
+const Broadcast = sequelize.define('Broadcast', {
     uuid: {
-        type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true,
-    }, enabled: {
-        type: DataTypes.BOOLEAN, defaultValue: true,
-    }, description: {
-        type: DataTypes.STRING, defaultValue: '',
-    }, category: {
-        type: DataTypes.ENUM('company', 'university'),
-    }, funds: {
-        type: DataTypes.DECIMAL(10, 2), defaultValue: 0.00,
-    }, plan: {
-        type: DataTypes.ENUM('free', 'standard', 'premium'), defaultValue: 'free',
-    }, name: {
-        type: DataTypes.STRING, allowNull: false,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+    },
+    enabled: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+    },
+    description: {
+        type: DataTypes.STRING,
+        defaultValue: '',
+    },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: '',
+    },
+    tags: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        defaultValue: [],
+    },
+    createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
     },
 });
 
 const User = require('./User');
-Organization.belongsTo(User, {foreignKey: 'userId'});
+Broadcast.belongsTo(User, {foreignKey: 'userId'});
 
-module.exports = Organization;
+module.exports = Broadcast;
