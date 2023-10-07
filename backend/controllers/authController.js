@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Token = require('../models/Token');
 const CustomError = require('../errors');
 const {createToken} = require('../utils/token');
 const {StatusCodes} = require("http-status-codes");
@@ -17,7 +18,7 @@ const register = async (req, res) => {
         throw new CustomError.BadRequestError('Username already exists');
     }
 
-    //const token = createToken(user);
+    const user = await User.create({username, email, password});
     res.status(StatusCodes.CREATED).json({result: 'success'});
 };
 
@@ -39,7 +40,12 @@ const login = async (req, res) => {
             throw new CustomError.UnauthenticatedError('Invalid credentials');
         }
 
+
         const token = createToken({username: user.username, active: user.active, uuid: user.uuid});
+
+        await Token.destroy({where: {userId: user.uuid}});
+        await Token.create({userId: user.uuid, token});
+
         res.status(StatusCodes.OK).json({token: token});
     } catch (error) {
         res.status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR).json({error: error.message});
