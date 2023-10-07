@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import {Routes, Route, Router} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 
 import './App.css';
 
@@ -22,6 +21,11 @@ import OrgDialog from "./pages/Dialog/OrgDialog/OrgDialog";
 
 import NewBroadcast from "./pages/Sections/Organization/Pages/BroadcastsManager/NewBroadcast";
 import ListBroadcasts from "./pages/Sections/Organization/Pages/BroadcastsManager/ListBroadcasts";
+import ViewBroadcast from "./pages/Sections/Organization/Pages/BroadcastsManager/ViewBroadcast";
+
+import NewJob from "./pages/Sections/Organization/Pages/JobsManager/NewJob";
+import ListJobs from "./pages/Sections/Organization/Pages/JobsManager/ListJobs";
+import ViewJob from "./pages/Sections/Organization/Pages/JobsManager/ViewJob";
 
 import StudentSidebarComponent from "./pages/Sections/Student/StudentSidebarComponent";
 import StudDash from "./pages/Sections/Student/Pages/StudDash/StudDash";
@@ -53,11 +57,11 @@ function App() {
 
                 <Route path="broadcasts" element={<ListBroadcasts />} />
                 <Route path="broadcasts/new" element={<NewBroadcast />} />
-                <Route path="broadcasts/view/:id" element={<NewBroadcast />} />
+                <Route path="broadcasts/view/:id" element={<ViewBroadcast />} />
 
-                <Route path="jobs" element={<NewBroadcast />} />
-                <Route path="jobs/new" element={<NewBroadcast />} />
-                <Route path="jobs/view/:id" element={<NewBroadcast />} />
+                <Route path="jobs" element={<ListJobs />} />
+                <Route path="jobs/new" element={<NewJob />} />
+                <Route path="jobs/view/:id" element={<ViewJob />} />
 
                 <Route path="edu" element={<NewBroadcast />} />
                 <Route path="edu/new" element={<NewBroadcast />} />

@@ -1,12 +1,36 @@
-const JobOffer = ({ jobOffer }) => {
+import {AiOutlineLike, AiOutlineUsergroupAdd} from "react-icons/ai";
+
+import "./JobOffer.scss";
+
+const JobOffer = ({avatar, name, org, title, content, time, applicants, category}) => {
     return (
-        <div className="job-offer">
-            <h2>{jobOffer.title}</h2>
-            <p>{jobOffer.description}</p>
-            <p>{jobOffer.requirements}</p>
-            <p>{jobOffer.salary}</p>
-            <p>{jobOffer.location}</p>
-            <p>{jobOffer.contact}</p>
+        <div className={"broadcast-wrapper"}>
+            <div className={"avatar-box"}>
+            </div>
+            <div className={"content-box"}>
+                <div className={"content-top-row"}>
+                    <div>
+                        <p className={"content-uploader"}>Posted by {name}
+                            <span> · </span>
+                            <span style={{fontWeight: "bold"}}>{title}</span>
+                            <span> · </span>
+                            <span style={{color: 'white', borderRadius: '5px', fontSize: '15px', backgroundColor: 'orange', padding: "0px 5px 0px 5px"}}>{category}</span>
+                        </p>
+                    </div>
+                    <p className={"content-time"}>{time}</p>
+                </div>
+
+                <div className={"content-bottom-row"}>
+                    <p>
+                        <span style={{fontWeight: 'bold'}}>{org}</span>
+                        <span> · </span>
+                        {content}
+                    </p>
+                    <p>
+                        <AiOutlineUsergroupAdd />{applicants}
+                    </p>
+                </div>
+            </div>
         </div>
     );
 }
