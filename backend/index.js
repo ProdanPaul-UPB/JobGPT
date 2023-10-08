@@ -28,7 +28,7 @@ app.use('/api/v1/social-profiles', require('./routes/socialRoutes'));
 app.use('api/v1/broadcasts', require('./routes/broadcastsRoutes'));
 app.use('api/v1/posts', require('./routes/postsRoutes'));
 app.use('api/v1/jobs', require('./routes/jobsRoutes'));
-
+app.use(require('./routes/dialogflow'))
 
 app.listen(PORT, () => {
     console.log(`Started on port ${PORT}...`);
