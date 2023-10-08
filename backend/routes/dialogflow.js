@@ -7,22 +7,9 @@ const {SessionsClient} = require("@google-cloud/dialogflow-cx");
 router.post("/dialogflow", async (req, res) => {
   const client = new SessionsClient();
 
-  const sessionPath = client.projectLocationAgentSessionPath(
-    "dialogtests",
-    "europe-west2",
-    "6c8a7e5b-4d00-47aa-b53f-1e26a8f41c70",
-    "asdada"
-  );
-  const request = {
-    session: sessionPath,
-    queryInput: {
-      text: { text: "Hello!" },
-    },
-  };
+ console.log(req.body);
 
-  const response = await client.detectIntent(request);
-
-  console.log(response);
+ 
   // let tag = req.body.fulfillmentInfo.tag;
 
   // console.log('A new request came...');

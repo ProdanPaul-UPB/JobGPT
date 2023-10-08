@@ -86,7 +86,7 @@ const NavigationBar = () => {
                                     </NavDropdown>) : (<Nav.Link style={{marginRight: '10px'}} href={'/login'}>Login</Nav.Link>)}
 
                                 <button onClick={() => {
-                                    navigate('/organization/dash')
+                                    navigate('/student/dash')
                                 }} style={{
                                     color: 'white',
                                     background: '#153470',
