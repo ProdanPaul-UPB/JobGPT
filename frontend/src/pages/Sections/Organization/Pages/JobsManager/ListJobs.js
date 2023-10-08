@@ -12,7 +12,7 @@ const ListJobs = () => {
         <div style={{width: '100%'}} className="list-JobOffers">
             <Container>
                 <div style={{display: 'flex', justifyContent: 'space-between', border: 'none'}}>
-                    <h1 style={{margin: "2rem 0 2rem 0", textAlign: "left"}}>My Jobs</h1>
+                    <h1 style={{margin: "2rem 0 2rem 0", textAlign: "left"}}>My Job Offers</h1>
                     <button onClick={() => {navigate("new")}} style={{border: 'none', background: 'none', color: '#153470', borderRadius: '10px'}} >
                         <AiOutlinePlus size={40} />
                     </button>

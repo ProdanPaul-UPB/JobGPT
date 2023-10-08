@@ -7,6 +7,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { AiOutlineHome } from "react-icons/ai";
 import { TbBuildingCommunity, TbBuildingBroadcastTower } from "react-icons/tb";
 import { BiChat } from "react-icons/bi";
+import { FaUniversity } from "react-icons/fa";
 
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -76,18 +77,18 @@ const OrganizationSidebarComponent = () => {
                         </div>
                     </OverlayTrigger>
 
-                    <OverlayTrigger placement="right" overlay={org_tooltip}>
-                        <div className={"org-side-item"}>
-                            <Link to={"/organization/communities"} >
-                                <TbBuildingCommunity size={30} className={"org-side-item-icon"} />
-                            </Link>
-                        </div>
-                    </OverlayTrigger>
-
                     <OverlayTrigger placement="right" overlay={chat_tooltip}>
                         <div className={"org-side-item"}>
                             <Link to={"/organization/chat"} >
                                 <BiChat size={30} className={"org-side-item-icon"} />
+                            </Link>
+                        </div>
+                    </OverlayTrigger>
+
+                    <OverlayTrigger placement="right" overlay={org_tooltip}>
+                        <div className={"org-side-item"}>
+                            <Link to={"/organization/edu"} >
+                                <FaUniversity size={30} className={"org-side-item-icon"} />
                             </Link>
                         </div>
                     </OverlayTrigger>
