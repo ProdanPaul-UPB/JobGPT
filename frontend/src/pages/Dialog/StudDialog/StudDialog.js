@@ -1,27 +1,70 @@
 import {
-    Avatar,
-    ChatContainer,
-    ConversationHeader,
-    InfoButton,
-    MainContainer, Message, MessageInput,
-    MessageList, MessageSeparator
+  Avatar,
+  ChatContainer,
+  ConversationHeader,
+  InfoButton,
+  MainContainer,
+  Message,
+  MessageInput,
+  MessageList,
+  MessageSeparator,
 } from "@chatscope/chat-ui-kit-react";
 import zoeIco from "../../../static/logo.png";
-import {useState} from "react";
+import { useState, useEffect } from "react";
 
 const StudDialog = () => {
+  const [messageInputValue, setMessageInputValue] = useState("");
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
 
-    const [messageInputValue, setMessageInputValue] = useState("");
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
 
-    return (
-        <div style={{
-            height: "100vh",
-            width: "100vw",
-            position: "relative"
-        }}>
-            <MainContainer responsive>
+    window.addEventListener('resize', handleWindowResize);
 
-                <ChatContainer>
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+  return (
+    <div
+      style={{
+        height: "100vh",
+        width: "100vw",
+        position: "relative",
+      }}
+    >
+      <MainContainer responsive>
+        <div
+          id="root"
+          dangerouslySetInnerHTML={{
+            __html: `<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+            <df-messenger
+              location="europe-west3"
+              project-id="eco-plating-401216"
+              agent-id="36330145-1648-4c17-ba92-ac66b1706e3d"
+              language-code="ro">
+              <df-messenger-chat
+               chat-title="JobGPT">
+              </df-messenger-chat>
+            </df-messenger>
+            <style>
+              df-messenger {
+                z-index: 999;
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                top: 0;
+                width: ${windowSize[0] - 60}px;
+              }
+            </style>`,
+          }}
+        />
+        {/* <ChatContainer>
 
                     <ConversationHeader>
                         <ConversationHeader.Back />
@@ -131,11 +174,10 @@ const StudDialog = () => {
                         </Message>
                     </MessageList>
                     <MessageInput placeholder="Type message here" value={messageInputValue} onChange={val => setMessageInputValue(val)} onSend={() => setMessageInputValue("")} />
-                </ChatContainer>
-
-            </MainContainer>
-        </div>
-    );
-}
+                </ChatContainer> */}
+      </MainContainer>
+    </div>
+  );
+};
 
 export default StudDialog;

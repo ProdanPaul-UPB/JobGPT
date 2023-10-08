@@ -25,6 +25,7 @@ import ViewBroadcast from "./pages/Sections/Organization/Pages/BroadcastsManager
 
 import NewJob from "./pages/Sections/Organization/Pages/JobsManager/NewJob";
 import ListJobs from "./pages/Sections/Organization/Pages/JobsManager/ListJobs";
+import ListStudentJobs from "./pages/Sections/Student/Pages/JobsManager/ListStudentJobs";
 import ViewJob from "./pages/Sections/Organization/Pages/JobsManager/ViewJob";
 
 import NewEdu from "./pages/Sections/Organization/Pages/EduManager/NewEdu";
@@ -85,6 +86,7 @@ function App() {
                 <Route path="dialog" element={<StudDialog />} ></Route>
 
                 <Route path="settings" element={<OrgSettingsSelector />} />
+                <Route path="jobs" element={<ListStudentJobs />} />
 
             </Route>
 

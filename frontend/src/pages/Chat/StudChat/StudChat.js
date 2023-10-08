@@ -149,8 +149,7 @@ const StudChat = () => {
                     <ConversationList>
                         {students &&
                             students.map((student) => {
-                                console.log(student.userId);
-                                console.log(getAuthFromStorage());
+                                console.log(student);
                                 if (student.userId != getAuthFromStorage().uuid) {
                                     return (
                                         <Conversation
@@ -159,10 +158,10 @@ const StudChat = () => {
                                                 setActiveConvo(student);
                                             }}
                                             name={student.lastname + " " + student.firstname}
-                                            lastSenderName={
-                                                student.lastname + " " + student.firstname
-                                            }
-                                            info="Yes i can do it for you"
+                                            // lastSenderName={
+                                            //     student.lastname + " " + student.firstname
+                                            // }
+                                            // info="Yes i can do it for you"
                                         >
                                             <Avatar
                                                 src={lillyIco}

@@ -19,7 +19,7 @@ import {
   MessageSeparator,
 } from "@chatscope/chat-ui-kit-react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import lillyIco from "../../../static/logo.png";
 import joeIco from "../../../static/logo.png";
@@ -42,7 +42,22 @@ const OrgDialog = () => {
 
   // root.render(<p>Hello</p>);
 
-  const width = window.innerWidth - 60;
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
 
   return (
     <div
@@ -82,7 +97,7 @@ const OrgDialog = () => {
                 bottom: 0;
                 right: 0;
                 top: 0;
-                width: ${width}px;
+                width: ${windowSize[0] - 60}px;
               }
             </style>`,
           }}
