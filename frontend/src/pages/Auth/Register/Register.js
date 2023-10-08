@@ -96,8 +96,6 @@ const Register = () => {
     setErrors({});
     registerState.sendRequest(form).then((res) => {
       if (res) {
-        console.log(res.userId);
-        console.log({ ...statusForm, userId: res.userId });
         if (status === "student") {
           studentState
             .sendRequest({ ...statusForm, userId: res.userId })

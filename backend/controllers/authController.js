@@ -70,7 +70,7 @@ const login = async (req, res) => {
         await Token.destroy({where: {userId: user.uuid}});
         await Token.create({userId: user.uuid, token});
 
-        res.status(StatusCodes.OK).json({token: token});
+        res.status(StatusCodes.OK).json({token: token, uuid: user.uuid});
     } catch (error) {
         res.status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR).json({error: error.message});
     }
