@@ -27,11 +27,17 @@ import NewJob from "./pages/Sections/Organization/Pages/JobsManager/NewJob";
 import ListJobs from "./pages/Sections/Organization/Pages/JobsManager/ListJobs";
 import ViewJob from "./pages/Sections/Organization/Pages/JobsManager/ViewJob";
 
+import NewEdu from "./pages/Sections/Organization/Pages/EduManager/NewEdu";
+import ListEdu from "./pages/Sections/Organization/Pages/EduManager/ListEdu";
+import ViewEdu from "./pages/Sections/Organization/Pages/EduManager/ViewEdu";
+
 import StudentSidebarComponent from "./pages/Sections/Student/StudentSidebarComponent";
 import StudDash from "./pages/Sections/Student/Pages/StudDash/StudDash";
 import StudChat from "./pages/Chat/StudChat/StudChat";
 import StudDialog from "./pages/Dialog/StudDialog/StudDialog";
 import SubmitRegisterCode from "./pages/Auth/Register/SubmitRegisterCode";
+
+import Careers from "./pages/Careers/Careers";
 
 function App() {
 
@@ -48,6 +54,7 @@ function App() {
                 <Route path="register" element={<Register />} />
                 <Route path="opportunities" element={<OpportunitySearch />} />
                 <Route path="submit-register-code" element={<SubmitRegisterCode />} />
+                <Route path="/careers/:career" element={<Careers />}></Route>
             </Route>
 
             <Route path="organization" element={<OrganizationSidebarComponent />} >
@@ -63,9 +70,9 @@ function App() {
                 <Route path="jobs/new" element={<NewJob />} />
                 <Route path="jobs/view/:id" element={<ViewJob />} />
 
-                <Route path="edu" element={<NewBroadcast />} />
-                <Route path="edu/new" element={<NewBroadcast />} />
-                <Route path="edu/view/:id" element={<NewBroadcast />} />
+                <Route path="edu" element={<ListEdu />} />
+                <Route path="edu/new" element={<NewEdu />} />
+                <Route path="edu/view/:id" element={<ViewEdu />} />
 
                 <Route path="settings" element={<OrgSettingsSelector />} />
                 <Route path="settings/org" element={<OrgSettings />} />
@@ -76,6 +83,9 @@ function App() {
                 <Route path="dash" element={<StudDash />} ></Route>
                 <Route path="chat" element={<StudChat />} ></Route>
                 <Route path="dialog" element={<StudDialog />} ></Route>
+
+                <Route path="settings" element={<OrgSettingsSelector />} />
+
             </Route>
 
         </Routes>

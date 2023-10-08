@@ -54,7 +54,7 @@ const NavigationBar = () => {
         <div style={{borderBottom: "1px solid lightgray"}}>
             <Container>
                 <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                         <div className={"brand"}>
                             <img className={"logo"} src={logo}/>
                             <p className={"brandtext"}>JobGPT</p>
@@ -77,20 +77,12 @@ const NavigationBar = () => {
                                 </Nav.Link>
                                 {loggedIn ? (
                                     <NavDropdown title={renderNavDropdownTitle()} id="collapsible-nav-dropdown">
-                                        <NavDropdown.Item
 
-                                            onClick={() => handleStatusChange('student')}
-                                            active={status === 'student'}
-                                        >
-                                            Student
-                                        </NavDropdown.Item>
                                         <NavDropdown.Item
-
-                                            onClick={() => handleStatusChange('organization')}
-                                            active={status === 'organization'}
                                         >
-                                            Angajator / Universitate
+                                            Log Out
                                         </NavDropdown.Item>
+
                                     </NavDropdown>) : (<Nav.Link style={{marginRight: '10px'}} href={'/login'}>Login</Nav.Link>)}
 
                                 <button onClick={() => {

@@ -81,7 +81,7 @@ const HeaderSection = () => {
                 <div style={{background: `linear-gradient(
           rgba(0, 0, 0, 0.5), 
           rgba(0, 0, 0, 0.5)
-        ),url(${corporate})`, backgroundSize: 'cover'}}>
+        ),url(${corporate})`, backgroundSize: 'cover', marginBottom: '5rem'}}>
 
                     <a href={"/dialog"} style={{textDecoration: "none"}}>
                         <h1 className={'page_title'} style={{
@@ -90,40 +90,6 @@ const HeaderSection = () => {
                         </h1>
                     </a>
 
-                </div>
-
-                <div>
-                    <h1 className={'page_title'}>Descoperă comunităţi</h1>
-
-                    <div className="header-content__search">
-                        <Form.Control placeholder="Caută nume de comunităţi sau cuvinte cheie" className={"search-field"} />
-                        <button className={"search-button"}>Caută</button>
-                    </div>
-
-                    <Communities />
-
-                </div>
-
-                <div>
-                    <h1 className={'page_title'}>Descoperă oportunităţi academice</h1>
-
-                    <div className="header-content__search">
-                        <Form.Control placeholder="Caută nume de universităţi sau cuvinte cheie" className={"search-field"} />
-                        <button className={"search-button"}>Caută</button>
-                    </div>
-
-                    <Communities />
-                </div>
-
-                <div>
-                    <h1 className={'page_title'}>Descoperă oportunităţi de angajare</h1>
-
-                    <div className="header-content__search">
-                        <Form.Control placeholder="Caută nume de joburi sau cuvinte cheie" className={"search-field"} />
-                        <button className={"search-button"}>Caută</button>
-                    </div>
-                    
-                    <Communities />
                 </div>
 
             </Container>
