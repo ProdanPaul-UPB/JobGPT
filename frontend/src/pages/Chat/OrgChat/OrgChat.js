@@ -54,6 +54,8 @@ const OrgChat = () => {
   const [activeConvo, setActiveConvo] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  let isLoggedIn = getAuthFromStorage() != null;
+
   function sendMessage(toUid) {
     console.log(toUid);
     addDoc(
@@ -96,21 +98,20 @@ const OrgChat = () => {
 
   // Use effect for activeConvo
   useEffect(() => {
-    if (activeConvo) {
-      console.log(activeConvo);
+    if (activeConvo && isLoggedIn) {
       setTalkingToUid(activeConvo.userId);
     }
   }, [activeConvo]);
 
   useEffect(() => {
     setLoading(loadingMessages);
-    console.log(loadingMessages);
   }, [loadingMessages]);
 
   useEffect(() => {
-    if (studentsAll.data && studentsAll.data.students) {
+    if (studentsAll.data && studentsAll.data.students && isLoggedIn) {
       setStudents(studentsAll.data.students);
-      if (activeConvo == null) {
+
+      if (activeConvo == null && studentsAll.data.students.length > 1) {
         setActiveConvo(studentsAll.data.students[0]);
       }
     }
@@ -119,6 +120,26 @@ const OrgChat = () => {
   useEffect(() => {
     setMessages(messagesList);
   }, [messagesList]);
+
+  // Check if the user is logged in
+  if (!isLoggedIn) {
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          position: "relative",
+        }}
+      >
+        <MainContainer responsive>
+          <Sidebar position="left" scrollable={false}>
+            <Search placeholder="Search..." />
+          </Sidebar>
+          <div>You are not logged in!</div>
+        </MainContainer>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -134,9 +155,12 @@ const OrgChat = () => {
           <ConversationList>
             {students &&
               students.map((student) => {
+                console.log(student.userId);
+                console.log(getAuthFromStorage());
                 if (student.userId != getAuthFromStorage().uuid) {
                   return (
                     <Conversation
+                      key={student.userId}
                       onClick={() => {
                         setActiveConvo(student);
                       }}
@@ -160,7 +184,9 @@ const OrgChat = () => {
 
         {/* Chat container */}
         {!activeConvo ? (
-          <div>No selected conversation</div>
+          <div style={{ width: "100%", height: "100%" }}>
+            {students.length > 1 ? "No active conversation" : "No students"}
+          </div>
         ) : (
           <>
             {loading ? (
@@ -188,7 +214,7 @@ const OrgChat = () => {
                 {/* Main Messages */}
 
                 <MessageList
-                  // typingIndicator={<TypingIndicator content="Zoe is typing" />}
+                // typingIndicator={<TypingIndicator content="Zoe is typing" />}
                 >
                   {/* <MessageSeparator content="Saturday, 30 November 2019" /> */}
 
