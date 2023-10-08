@@ -37,6 +37,8 @@ import StudChat from "./pages/Chat/StudChat/StudChat";
 import StudDialog from "./pages/Dialog/StudDialog/StudDialog";
 import SubmitRegisterCode from "./pages/Auth/Register/SubmitRegisterCode";
 
+import Careers from "./pages/Careers/Careers";
+
 function App() {
 
   document.title = 'JobGPT';
@@ -52,6 +54,7 @@ function App() {
                 <Route path="register" element={<Register />} />
                 <Route path="opportunities" element={<OpportunitySearch />} />
                 <Route path="submit-register-code" element={<SubmitRegisterCode />} />
+                <Route path="/careers/:career" element={<Careers />}></Route>
             </Route>
 
             <Route path="organization" element={<OrganizationSidebarComponent />} >
@@ -80,6 +83,9 @@ function App() {
                 <Route path="dash" element={<StudDash />} ></Route>
                 <Route path="chat" element={<StudChat />} ></Route>
                 <Route path="dialog" element={<StudDialog />} ></Route>
+
+                <Route path="settings" element={<OrgSettingsSelector />} />
+
             </Route>
 
         </Routes>

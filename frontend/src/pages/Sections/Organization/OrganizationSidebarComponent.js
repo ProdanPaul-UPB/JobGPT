@@ -28,7 +28,7 @@ const OrganizationSidebarComponent = () => {
 
     const org_tooltip = (
         <Tooltip id="tooltip">
-            <strong>Organizations</strong>
+            <strong>Education Offers</strong>
         </Tooltip>
     );
 

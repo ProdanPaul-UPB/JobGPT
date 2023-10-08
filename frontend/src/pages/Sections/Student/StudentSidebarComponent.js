@@ -2,11 +2,12 @@ import {Link, Outlet} from "react-router-dom";
 import "./StudentSidebarComponent.scss";
 
 import { IoSettingsOutline } from "react-icons/io5";
-import { BsRobot } from "react-icons/bs";
+import {BsBriefcase, BsRobot} from "react-icons/bs";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { AiOutlineHome } from "react-icons/ai";
 import { TbBuildingCommunity, TbBuildingBroadcastTower } from "react-icons/tb";
 import { BiChat } from "react-icons/bi";
+import { FaUniversity } from "react-icons/fa";
 
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -33,7 +34,7 @@ const StudentSidebarComponent = () => {
 
     const stud_tooltip = (
         <Tooltip id="tooltip">
-            <strong>students</strong>
+            <strong>Universities</strong>
         </Tooltip>
     );
 
@@ -49,6 +50,13 @@ const StudentSidebarComponent = () => {
         </Tooltip>
     );
 
+
+    const jobs_tooltip = (
+        <Tooltip id="tooltip">
+            <strong>Job Offers</strong>
+        </Tooltip>
+    );
+
     return (
         <div className={"stud-wrapper"} >
             <div className={"stud-side-container"}>
@@ -56,16 +64,24 @@ const StudentSidebarComponent = () => {
 
                     <OverlayTrigger placement="right" overlay={home_tooltip}>
                         <div className={"stud-side-item"}>
-                            <Link to={"/student/dash"} >
+                            <Link to={"/"} >
                                 <AiOutlineHome size={30} className={"stud-side-item-icon"} />
                             </Link>
                         </div>
                     </OverlayTrigger>
 
-                    <OverlayTrigger placement="right" overlay={dashboard_tooltip}>
+                    {/*<OverlayTrigger placement="right" overlay={dashboard_tooltip}>
                         <div className={"stud-side-item"}>
                             <Link to={"/student/dash"} >
                                 <AiOutlineDashboard size={30} className={"stud-side-item-icon"} />
+                            </Link>
+                        </div>
+                    </OverlayTrigger>*/}
+
+                    <OverlayTrigger placement="right" overlay={chat_tooltip}>
+                        <div className={"stud-side-item"}>
+                            <Link to={"/student/chat"} >
+                                <BiChat size={30} className={"stud-side-item-icon"} />
                             </Link>
                         </div>
                     </OverlayTrigger>
@@ -80,33 +96,36 @@ const StudentSidebarComponent = () => {
 
                     <OverlayTrigger placement="right" overlay={stud_tooltip}>
                         <div className={"stud-side-item"}>
-                            <Link to={"/student/communities"} >
-                                <TbBuildingCommunity size={30} className={"stud-side-item-icon"} />
+                            <Link to={"/student/edu"} >
+                                <FaUniversity size={30} className={"stud-side-item-icon"} />
                             </Link>
                         </div>
                     </OverlayTrigger>
 
                     <OverlayTrigger placement="right" overlay={chat_tooltip}>
                         <div className={"stud-side-item"}>
-                            <Link to={"/student/chat"} >
-                                <BiChat size={30} className={"stud-side-item-icon"} />
-                            </Link>
-                        </div>
-                    </OverlayTrigger>
-
-                    <OverlayTrigger placement="right" overlay={chat_tooltip}>
-                        <div className={"stud-side-item"}>
-                            <Link to={"/student/chat"} >
+                            <Link to={"/student/broadcasts"} >
                                 <TbBuildingBroadcastTower size={30} className={"stud-side-item-icon"} />
                             </Link>
                         </div>
                     </OverlayTrigger>
+
+                    <OverlayTrigger placement="right" overlay={jobs_tooltip}>
+                        <div className={"org-side-item"}>
+                            <Link to={"/student/jobs"} >
+                                <BsBriefcase size={30} className={"org-side-item-icon"} />
+                            </Link>
+                        </div>
+                    </OverlayTrigger>
+
                 </div>
 
                 <div>
                     <OverlayTrigger placement="right" overlay={settings_tooltip}>
                         <div className={"stud-side-item"}>
-                            <IoSettingsOutline size={30} className={"stud-side-item-icon"} />
+                            <Link to={"/student/settings"} >
+                                <IoSettingsOutline size={30} className={"stud-side-item-icon"} />
+                            </Link>
                         </div>
                     </OverlayTrigger>
                 </div>

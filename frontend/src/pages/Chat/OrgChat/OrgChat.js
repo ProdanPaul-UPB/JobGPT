@@ -22,13 +22,7 @@ import {
 import { useState, useEffect } from "react";
 
 import lillyIco from "../../../static/logo.png";
-import joeIco from "../../../static/logo.png";
 import zoeIco from "../../../static/logo.png";
-import eliotIco from "../../../static/logo.png";
-import akaneIco from "../../../static/logo.png";
-import kaiIco from "../../../static/logo.png";
-import emilyIco from "../../../static/logo.png";
-import patrikIco from "../../../static/logo.png";
 import useMessages from "./../../../hooks/useMessages";
 import {
   doc,
@@ -235,7 +229,6 @@ const OrgChat = () => {
                   })}
                 </MessageList>
                 <MessageInput
-                  placeholder="Type message here"
                   value={messageInputValue}
                   onChange={(val) => {
                     setMessageInputValue(val);
@@ -248,39 +241,6 @@ const OrgChat = () => {
             )}
           </>
         )}
-
-        <Sidebar position="right">
-          <ExpansionPanel open title="INFO">
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-          </ExpansionPanel>
-          <ExpansionPanel title="LOCALIZATION">
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-          </ExpansionPanel>
-          <ExpansionPanel title="MEDIA">
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-          </ExpansionPanel>
-          <ExpansionPanel title="SURVEY">
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-          </ExpansionPanel>
-          <ExpansionPanel title="OPTIONS">
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum</p>
-          </ExpansionPanel>
-        </Sidebar>
       </MainContainer>
     </div>
   );

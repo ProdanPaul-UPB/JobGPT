@@ -155,7 +155,7 @@ const OrgDialog = () => {
 
             </MainContainer>
         </div>
-    )
+    );
 }
 
 export default OrgDialog;
