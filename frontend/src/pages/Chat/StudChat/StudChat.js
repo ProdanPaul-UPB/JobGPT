@@ -106,7 +106,14 @@ const StudChat = () => {
             setStudents(studentsAll.data.students);
 
             if (activeConvo == null && studentsAll.data.students.length > 1) {
-                setActiveConvo(studentsAll.data.students[0]);
+                // Set the active convo to first convo where to student is not me
+                studentsAll.data.students.forEach((student) => {
+                    if (student.userId != getAuthFromStorage().uuid) {
+                        setActiveConvo(student);
+                        return;
+                    }
+                });
+
             }
         }
     }, [studentsAll]);
